@@ -24,6 +24,7 @@ logging.basicConfig(
     level=os.getenv("LOG_LEVEL", "INFO"),
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
 LOGGER = logging.getLogger("movie_bot")
 
 
@@ -229,7 +230,7 @@ def run_bot(settings: Settings, repository: MovieRepository) -> None:
         drop_pending_updates=False,
         poll_interval=1.0,
         timeout=30,
-        stop_signals=(signal.SIGINT, signal.SIGTERM),
+        stop_signals=None if os.name == "nt" else (signal.SIGINT, signal.SIGTERM),
     )
 
 
