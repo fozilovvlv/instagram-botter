@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: telegram-movie-bot
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    autoDeployTrigger: commit
+    envVars:
+      - key: HOSTING_PROVIDER
+        value: render
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: MOVIE_CHANNEL_ID
+        sync: false
+      - key: DATABASE_URL
+        sync: false
